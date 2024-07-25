@@ -7,5 +7,5 @@ Route::get('/', function () {
 });
 
 Route::get('/demo', function () {
-    return view('admin.layouts.admin');
-});
+    return view('admin.dashboard');
+})->middleware('auth')->name('demo');
