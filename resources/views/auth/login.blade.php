@@ -96,13 +96,13 @@
                         <!--end::Login options-->
                         <!--begin::separator-->
                         <div class="separator separator-content my-14">
-                            <span class="w-125px text-gray-500 fw-semibold fs-7">یا با ایمیل</span>
+                            <span class="w-125px text-gray-500 fw-semibold fs-7">یا با نام کاربری</span>
                         </div>
                         <!--end::separator-->
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::ایمیل-->
-                            <input type="text" placeholder="ایمیل" name="email" autocomplete="off" class="form-control bg-transparent" />
+                            <input type="text" placeholder="نام کاربری" name="username" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::ایمیل-->
                         </div>
                         <!--end::Input group=-->
