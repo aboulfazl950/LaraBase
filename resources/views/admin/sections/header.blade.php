@@ -4879,8 +4879,7 @@
                         <div class="menu-item px-5">
                             <form method="POST" action="{{ route('logout') }}" >
                                 @csrf
-                                <button class="menu-link px-5" type="submit">خروج</button>
-                                <a href="{{route('logout')}}" class="menu-link px-5">خروج</a>
+                                <a onclick="this.closest('form').submit();return false;" href="#" class="menu-link px-5">خروج</a>
                             </form>
 
                         </div>
