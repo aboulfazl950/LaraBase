@@ -14,13 +14,28 @@ Route::prefix('account')->name('account.')->group(function () {
     })->name('settings');
 
     Route::post('/profile/{user}/profile-image', function (\Illuminate\Http\Request $request,User $user) {
-        $fileNamePrimaryImage = generateFileName($request->avatar->getClientOriginalName());
-        //dd($fileNamePrimaryImage);
-        $request->avatar->move(public_path(env('PROFILE_IMAGES_UPLOAD_PATH')), $fileNamePrimaryImage);
+        if($request->avatar) {
+            $fileNamePrimaryImage = generateFileName($request->avatar->getClientOriginalName());
+            //dd($fileNamePrimaryImage);
+            $request->avatar->move(public_path(env('PROFILE_IMAGES_UPLOAD_PATH')), $fileNamePrimaryImage);
 
-        $user->update([
-            'profile_photo_path' => 'avatars/'.$fileNamePrimaryImage
-        ]);
+            $user->update([
+                'profile_photo_path' => $fileNamePrimaryImage
+            ]);
+        }
+        if($request->avatar_remove) {
+            $image_path = public_path(env('PROFILE_IMAGES_UPLOAD_PATH')).$user->profile_photo_path;
+
+            if(file_exists($image_path)) {
+                unlink($image_path);
+                $user->update([
+                    'profile_photo_path' => null
+                ]);
+            }
+
+
+        }
+
     })->name('save_profile');
 
 })->middleware('auth');
