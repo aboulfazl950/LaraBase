@@ -4678,7 +4678,7 @@
                         <!--end::Menu separator-->
                         <!--begin::Menu item-->
                         <div class="menu-item px-5">
-                            <a href="{{route('profile')}}" class="menu-link px-5">پروفایل من</a>
+                            <a href="{{route('account.overview')}}" class="menu-link px-5">پروفایل من</a>
                         </div>
                         <!--end::Menu item-->
                         <!--begin::Menu item-->
