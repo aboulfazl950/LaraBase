@@ -14,7 +14,7 @@
     <meta property="og:title" content="پنل ادمین مترونیک  " />
     <meta property="og:url" content="https://keenthemes.com/metronic" />
     <meta property="og:site_name" content="مترونیک by ساتراس وب" />
-    <link rel="canonical" href="http://authentication/layouts/creative/sign-in.html" />
+    <link rel="canonical" href="http://authentication/layouts/creative/sign-up.html" />
     <link rel="shortcut icon" href="{{asset('/media/logos/favicon.ico')}}" />
     <!--begin::Fonts(mandatory for all pages)-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/cssfamily=Inter:300,400,500,600,700" />
@@ -36,7 +36,7 @@
     <!--begin::Page bg image-->
     <style>body { background-image: url('{{asset('/media/auth/bg4.jpg')}}'); } [data-bs-theme="dark"] body { background-image: url('{{asset('/media/auth/bg4-dark.jpg')}}'); }</style>
     <!--end::Page bg image-->
-    <!--begin::احراز هویت - ورود -->
+    <!--begin::احراز هویت - ثبت نام -->
     <div class="d-flex flex-column flex-column-fluid flex-lg-row">
         <!--begin::کناری-->
         <div class="d-flex flex-center w-lg-50 pt-15 pt-lg-0 px-10">
@@ -61,70 +61,73 @@
                 <!--begin::Wrapper-->
                 <div class="d-flex flex-center flex-column flex-column-fluid px-lg-10 pb-15 pb-lg-20">
                     <!--begin::form-->
-                    <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="{{route('demo')}}" method="POST" action="{{ route('login') }}">
-                        @csrf
+                    <form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="authentication/layouts/creative/sign-in.html" action="#">
                         <!--begin::Heading-->
                         <div class="text-center mb-11">
                             <!--begin::Title-->
-                            <h1 class="text-gray-900 fw-bolder mb-3">ورود</h1>
+                            <h1 class="text-gray-900 fw-bolder mb-3">ثبت نام</h1>
                             <!--end::Title-->
                             <!--begin::Subtitle-->
                             <div class="text-gray-500 fw-semibold fs-6">شماr سوشیال کمپین ها</div>
                             <!--end::Subtitle=-->
                         </div>
                         <!--begin::Heading-->
-                        <!--begin::Login options-->
-                        <div class="row g-3 mb-9">
-                            <!--begin::Col-->
-                            <div class="col-md-6">
-                                <!--begin::گوگل link=-->
-                                <a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{asset('/media/svg/brand-logos/google-icon.svg')}}" class="h-15px me-3" />ورود از طریق گوگل</a>
-                                <!--end::گوگل link=-->
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-6">
-                                <!--begin::گوگل link=-->
-                                <a href="#" class="btn btn-flex btn-outline btn-text-gray-700 btn-active-color-primary bg-state-light flex-center text-nowrap w-100">
-                                    <img alt="Logo" src="{{asset('/media/svg/brand-logos/apple-black.svg')}}" class="theme-light-show h-15px me-3" />
-                                    <img alt="Logo" src="{{asset('/media/svg/brand-logos/apple-black-dark.svg')}}" class="theme-dark-show h-15px me-3" />با اپلیکیشن وارد شوید</a>
-                                <!--end::گوگل link=-->
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Login options-->
-                        <!--begin::separator-->
-                        <div class="separator separator-content my-14">
-                            <span class="w-125px text-gray-500 fw-semibold fs-7">یا با نام کاربری</span>
-                        </div>
-                        <!--end::separator-->
+
                         <!--begin::Input group=-->
                         <div class="fv-row mb-8">
                             <!--begin::ایمیل-->
-                            <input type="text" placeholder="نام کاربری" name="username" autocomplete="off" class="form-control bg-transparent" />
+                            <input type="text" placeholder="ایمیل" name="email" autocomplete="off" class="form-control bg-transparent" />
                             <!--end::ایمیل-->
                         </div>
-                        <!--end::Input group=-->
-                        <div class="fv-row mb-3">
-                            <!--begin::password-->
-                            <input type="password" placeholder="کلمه عبور" name="password" autocomplete="off" class="form-control bg-transparent" />
-                            <!--end::password-->
+                        <!--begin::Input group-->
+                        <div class="fv-row mb-8" data-kt-password-meter="true">
+                            <!--begin::Wrapper-->
+                            <div class="mb-1">
+                                <!--begin::Input wrapper-->
+                                <div class="position-relative mb-3">
+                                    <input class="form-control bg-transparent" type="password" placeholder="کلمه عبور" name="password" autocomplete="off" />
+                                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2" data-kt-password-meter-control="visibility">
+												<i class="ki-duotone ki-eye-slash fs-2"></i>
+												<i class="ki-duotone ki-eye fs-2 d-none"></i>
+											</span>
+                                </div>
+                                <!--end::Input wrapper-->
+                                <!--begin::Meter-->
+                                <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                                </div>
+                                <!--end::Meter-->
+                            </div>
+                            <!--end::Wrapper-->
+                            <!--begin::Hint-->
+                            <div class="text-muted">از 8 یا بیشتر کاراکتر با ترکیبی از حروف، اعداد و نمادها استفاده کنید.</div>
+                            <!--end::Hint-->
                         </div>
                         <!--end::Input group=-->
-                        <!--begin::Wrapper-->
-                        <div class="d-flex flex-stack flex-wrap gap-3 fs-base fw-semibold mb-8">
-                            <div></div>
-                            <!--begin::Link-->
-                            <a href="authentication/layouts/creative/reset-password.html" class="link-primary">فراموشی رمز</a>
-                            <!--end::Link-->
+                        <!--end::Input group=-->
+                        <div class="fv-row mb-8">
+                            <!--begin::تکرار رمز عبور-->
+                            <input placeholder="تکرار رمز عبور" name="confirm-password" type="password" autocomplete="off" class="form-control bg-transparent" />
+                            <!--end::تکرار رمز عبور-->
                         </div>
-                        <!--end::Wrapper-->
+                        <!--end::Input group=-->
+                        <!--begin::Accept-->
+                        <div class="fv-row mb-8">
+                            <label class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="toc" value="1" />
+                                <span class="form-check-label fw-semibold text-gray-700 fs-base ms-1">من قبول میکنم
+										<a href="#" class="ms-1 link-primary">تیم ها</a></span>
+                            </label>
+                        </div>
+                        <!--end::Accept-->
                         <!--begin::ثبت button-->
                         <div class="d-grid mb-10">
-                            <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                            <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
                                 <!--begin::Indicatیا label-->
-                                <span class="indicator-label">ورود</span>
+                                <span class="indicator-label">ثبت نام</span>
                                 <!--end::Indicatیا label-->
                                 <!--begin::Indicatیا progress-->
                                 <span class="indicator-progress">لطفا صبر کنید...
@@ -134,8 +137,8 @@
                         </div>
                         <!--end::ثبت button-->
                         <!--begin::ثبت نام-->
-                        <div class="text-gray-500 text-center fw-semibold fs-6">آیا هنوز عضو نشده
-                            <a href="{{route('register')}}" class="link-primary">ثبت نام</a></div>
+                        <div class="text-gray-500 text-center fw-semibold fs-6">از قبل اکانت دارید
+                            <a href="{{route('login')}}" class="link-primary fw-semibold">ورود</a></div>
                         <!--end::ثبت نام-->
                     </form>
                     <!--end::form-->
@@ -222,7 +225,7 @@
         </div>
         <!--end::Body-->
     </div>
-    <!--end::احراز هویت - ورود-->
+    <!--end::احراز هویت - ثبت نام-->
 </div>
 <!--end::Root-->
 <!--begin::Javascript-->
@@ -232,7 +235,7 @@
 <script src="{{asset('/js/admin/scripts.bundle.js')}}"></script>
 <!--end::Global Javascript Bundle-->
 <!--begin::سفارشی Javascript(used for this page only)-->
-<script src="{{asset('/js/custom/authentication/sign-in/general.js')}}"></script>
+<script src="{{asset('/js/custom/authentication/sign-up/general.js')}}"></script>
 <!--end::سفارشی Javascript-->
 <!--end::Javascript-->
 </body>

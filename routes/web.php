@@ -11,6 +11,10 @@ Route::get('/demo', function () {
     return view('admin.dashboard');
 })->middleware('auth')->name('demo');
 
+Route::get('/profile', function () {
+    return view('admin.profile');
+})->middleware('auth')->name('profile');
+
 Route::get('/add', function () {
     $user = User::create([
         'name' => 'modir',
