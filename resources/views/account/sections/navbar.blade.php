@@ -250,7 +250,7 @@
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5" href="account/security.html">امنیت</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('account/security') ? 'active' : ''}}" href="{{route('account.security')}}">امنیت</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->

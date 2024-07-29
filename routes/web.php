@@ -13,6 +13,10 @@ Route::prefix('account')->name('account.')->group(function () {
         return view('account.settings');
     })->name('settings');
 
+    Route::get('/security', function () {
+        return view('account.security');
+    })->name('security');
+
     Route::post('/profile/{user}/profile-image', function (\Illuminate\Http\Request $request,User $user) {
         if($request->avatar) {
             $fileNamePrimaryImage = generateFileName($request->avatar->getClientOriginalName());
