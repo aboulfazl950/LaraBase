@@ -3,6 +3,30 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
+Route::prefix('user-management')->name('user-management.')->group(function () {
+
+    Route::get('/users/list', function () {
+        return view('user-management.users.list');
+    })->name('user-list');
+
+    Route::get('/users/view', function () {
+        return view('user-management.users.view');
+    })->name('user-view');
+
+    Route::get('/roles/list', function () {
+        return view('user-management.roles.list');
+    })->name('role-list');
+
+    Route::get('/roles/view', function () {
+        return view('user-management.roles.view');
+    })->name('role-view');
+
+    Route::get('/permissions', function () {
+        return view('user-management.permissions');
+    })->name('permissions');
+
+})->middleware('auth');
+
 Route::prefix('account')->name('account.')->group(function () {
 
     Route::get('/overview', function () {
