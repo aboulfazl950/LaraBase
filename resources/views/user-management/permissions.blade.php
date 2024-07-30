@@ -323,7 +323,7 @@
                             <h2 class="fw-bold">یک مجوز را اضافه کنید</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-permissions-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" data-kt-permissions-modal-action="close">
                                 <i class="ki-duotone ki-cross fs-1">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -335,7 +335,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 mx-xl-15 my-7">
                             <!--begin::form-->
-                            <form id="kt_modal_add_permission_form" class="form" action="#">
+                            <form id="kt_modal_add_permission_form" class="form" action="{{ route('user-management.permissions.store') }}" method="POST">
+                                @csrf
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Tags-->
@@ -357,22 +358,39 @@
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
+                                    <!--begin::Tags-->
+                                    <label class="fs-6 fw-semibold form-label mb-2">
+                                        <span class="required">نام نمایشی دسترسی</span>
+                                        <span class="ms-2" data-bs-toggle="popover" data-bs-trigger="hover" data-bs-html="true" data-bs-content="نام مجوزها باید منحصر به فرد باشد.">
+																	<i class="ki-duotone ki-information fs-7">
+																		<span class="path1"></span>
+																		<span class="path2"></span>
+																		<span class="path3"></span>
+																	</i>
+																</span>
+                                    </label>
+                                    <!--end::Tags-->
+                                    <!--begin::Input-->
+                                    <input class="form-control form-control-solid" placeholder="Enter a permission display name" name="permission_display_name" />
+                                    <!--end::Input-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
                                     <!--begin::Checkbox-->
                                     <label class="form-check form-check-custom form-check-solid me-9">
-                                        <input class="form-check-input" type="checkbox" value="" name="permissions_cیاe" id="kt_permissions_cیاe" />
-                                        <span class="form-check-label" for="kt_permissions_cیاe">Set as cیاe permission</span>
+                                        <input class="form-check-input" type="checkbox" name="permissions_core" id="kt_permissions_core" />
+                                        <span class="form-check-label" for="kt_permissions_core">Set as core permission</span>
                                     </label>
                                     <!--end::Checkbox-->
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Disclaimer-->
-                                <div class="text-gray-600">مجوز به عنوان تنظیم شده است
-                                    <strong class="me-1">Core Permission</strong>قفل خواهد شد و
-                                    <strong class="me-1">قابل  نیست</strong>in امکانات/div>
+                                <div class="text-gray-600">Permission set as a <strong class="me-1">Core Permission</strong> will be locked and <strong class="me-1">not editable</strong> in future</div>
                                     <!--end::Disclaimer-->
                                     <!--begin::Actions-->
                                     <div class="text-center pt-15">
-                                        <button type="reset" class="btn btn-light me-3" data-kt-permissions-modal-action="cancel">لغو</button>
+                                        <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" data-kt-permissions-modal-action="cancel">لغو</button>
                                         <button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
                                             <span class="indicator-label">ثبت</span>
                                             <span class="indicator-progress">لطفا صبر کنید...
@@ -403,7 +421,7 @@
                             <h2 class="fw-bold">بروزرسانی Permission</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-kt-permissions-modal-action="close">
+                            <div class="btn btn-icon btn-sm btn-active-icon-primary" data-bs-dismiss="modal" data-kt-permissions-modal-action="close">
                                 <i class="ki-duotone ki-cross fs-1">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -460,7 +478,7 @@
                                 <!--end::Input group-->
                                 <!--begin::Actions-->
                                 <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-permissions-modal-action="cancel">لغو</button>
+                                    <button type="reset" class="btn btn-light me-3" data-bs-dismiss="modal" data-kt-permissions-modal-action="cancel">لغو</button>
                                     <button type="submit" class="btn btn-primary" data-kt-permissions-modal-action="submit">
                                         <span class="indicator-label">ثبت</span>
                                         <span class="indicator-progress">لطفا صبر کنید...

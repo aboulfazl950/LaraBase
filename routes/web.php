@@ -21,9 +21,7 @@ Route::prefix('user-management')->name('user-management.')->group(function () {
         return view('user-management.roles.view');
     })->name('role-view');
 
-    Route::get('/permissions', function () {
-        return view('user-management.permissions');
-    })->name('permissions');
+    Route::resource('/permissions', \App\Http\Controllers\Admin\PermissionManagementController::class);
 
 })->middleware('auth');
 
