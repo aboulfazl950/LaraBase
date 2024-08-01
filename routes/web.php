@@ -5,17 +5,7 @@ use App\Models\User;
 
 Route::prefix('user-management')->name('user-management.')->group(function () {
 
-    Route::get('/users/list', function () {
-        return view('user-management.users.list');
-    })->name('user-list');
-
-    Route::get('/users/view', function () {
-        return view('user-management.users.view');
-    })->name('user-view');
-
-    /*Route::get('/roles/view', function () {
-        return view('user-management.roles.view');
-    })->name('role-view');*/
+    Route::resource('/users', \App\Http\Controllers\Admin\UserManagementController::class);
 
     Route::resource('/roles', \App\Http\Controllers\Admin\RoleManagementController::class);
 
