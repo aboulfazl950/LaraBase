@@ -48,35 +48,9 @@
                         </tr>
                         </thead>
                         <tbody class="fw-semibold text-gray-600">
+                        @foreach ($permissions as $key => $permission)
                         <tr>
-                            <td>کاربر مدیریت</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                            </td>
-                            <td>05 May 2024, 10:10 pm</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>مدیریت محتوا</td>
+                            <td>{{ $permission->display_name }}</td>
                             <td>
                                 <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
                                 <a href="apps/user-management/roles/view.html" class="badge badge-light-danger fs-7 m-1">توسعه دهنده</a>
@@ -84,7 +58,7 @@
                                 <a href="apps/user-management/roles/view.html" class="badge badge-light-info fs-7 m-1">پشتیبانی</a>
                                 <a href="apps/user-management/roles/view.html" class="badge badge-light-warning fs-7 m-1">آزمایش</a>
                             </td>
-                            <td>20 Dec 2024, 5:30 pm</td>
+                            <td>{{verta($permission->created_at)}}</td>
                             <td class="text-end">
                                 <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
                                     <i class="ki-duotone ki-setting-3 fs-3">
@@ -106,203 +80,8 @@
                                 </button>
                             </td>
                         </tr>
-                        <tr>
-                            <td>مدیریت مالی</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-success fs-7 m-1">تحلیلگر</a>
-                            </td>
-                            <td>10 Nov 2024, 6:43 am</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>گزارش</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-success fs-7 m-1">تحلیلگر</a>
-                            </td>
-                            <td>05 May 2024, 5:20 pm</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>حقوق و دستمزد</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-success fs-7 m-1">تحلیلگر</a>
-                            </td>
-                            <td>10 Nov 2024, 5:20 pm</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>اختلاف نظرات مدیریت</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-danger fs-7 m-1">توسعه دهنده</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-info fs-7 m-1">پشتیبانی</a>
-                            </td>
-                            <td>25 Oct 2024, 5:20 pm</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>کنترل های کلید دسترسی</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-danger fs-7 m-1">توسعه دهنده</a>
-                            </td>
-                            <td>25 Jul 2024, 10:10 pm</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>دیتابیس مدیریت</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-danger fs-7 m-1">توسعه دهنده</a>
-                            </td>
-                            <td>19 Aug 2024, 10:30 am</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Repositیاy مدیریت</td>
-                            <td>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-primary fs-7 m-1">مدیریت</a>
-                                <a href="apps/user-management/roles/view.html" class="badge badge-light-danger fs-7 m-1">توسعه دهنده</a>
-                            </td>
-                            <td>21 Feb 2024, 10:30 am</td>
-                            <td class="text-end">
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px me-3" data-bs-toggle="modal" data-bs-target="#kt_modal_update_permission">
-                                    <i class="ki-duotone ki-setting-3 fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                                <button class="btn btn-icon btn-active-light-primary w-30px h-30px" data-kt-permissions-table-filter="delete_row">
-                                    <i class="ki-duotone ki-trash fs-3">
-                                        <span class="path1"></span>
-                                        <span class="path2"></span>
-                                        <span class="path3"></span>
-                                        <span class="path4"></span>
-                                        <span class="path5"></span>
-                                    </i>
-                                </button>
-                            </td>
-                        </tr>
+                        @endforeach
+
                         </tbody>
                     </table>
                     <!--end::Table-->

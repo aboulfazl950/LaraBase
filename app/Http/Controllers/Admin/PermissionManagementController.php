@@ -13,7 +13,8 @@ class PermissionManagementController extends Controller
      */
     public function index()
     {
-        return view('user-management.permissions');
+        $permissions = Permission::latest()->paginate(20);
+        return view('user-management.permissions',compact('permissions'));
     }
 
     /**
