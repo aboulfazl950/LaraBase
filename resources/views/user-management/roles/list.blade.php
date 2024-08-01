@@ -6,6 +6,7 @@
         <div id="kt_app_content_container" class="app-container container-xxl">
             <!--begin::Row-->
             <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-5 g-xl-9">
+                @foreach ($roles as $key => $role)
                 <!--begin::Col-->
                 <div class="col-md-4">
                     <!--begin::کارت-->
@@ -14,7 +15,7 @@
                         <div class="card-header">
                             <!--begin::کارت title-->
                             <div class="card-title">
-                                <h2>مدیریت</h2>
+                                <h2>{{ $role->display_name }}</h2>
                             </div>
                             <!--end::کارت title-->
                         </div>
@@ -54,190 +55,8 @@
                     <!--end::کارت-->
                 </div>
                 <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::کارت-->
-                    <div class="card card-flush h-md-100">
-                        <!--begin::کارت header-->
-                        <div class="card-header">
-                            <!--begin::کارت title-->
-                            <div class="card-title">
-                                <h2>توسعه دهنده</h2>
-                            </div>
-                            <!--end::کارت title-->
-                        </div>
-                        <!--end::کارت header-->
-                        <!--begin::کارت body-->
-                        <div class="card-body pt-1">
-                            <!--begin::users-->
-                            <div class="fw-bold text-gray-600 mb-5">کل کاربران با این نقش: 14</div>
-                            <!--end::users-->
-                            <!--begin::مجوزها-->
-                            <div class="d-flex flex-column text-gray-600">
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>برخی از کنترل های سرپرست</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش فقط خلاصه های مالی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش کنترل های کلید دسترسی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش پرداخت ها </div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش اختلاف نظرات</div>
-                                <div class='d-flex align-items-center py-2'>
-                                    <span class='bullet bg-primary me-3'></span>
-                                    <em>بیشتر</em>
-                                </div>
-                            </div>
-                            <!--end::مجوزها-->
-                        </div>
-                        <!--end::کارت body-->
-                        <!--begin::کارت footer-->
-                        <div class="card-footer flex-wrap pt-0">
-                            <a href="apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>
-                        </div>
-                        <!--end::کارت footer-->
-                    </div>
-                    <!--end::کارت-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::کارت-->
-                    <div class="card card-flush h-md-100">
-                        <!--begin::کارت header-->
-                        <div class="card-header">
-                            <!--begin::کارت title-->
-                            <div class="card-title">
-                                <h2>تحلیلگر</h2>
-                            </div>
-                            <!--end::کارت title-->
-                        </div>
-                        <!--end::کارت header-->
-                        <!--begin::کارت body-->
-                        <div class="card-body pt-1">
-                            <!--begin::users-->
-                            <div class="fw-bold text-gray-600 mb-5">کل کاربران با این نقش: 4</div>
-                            <!--end::users-->
-                            <!--begin::مجوزها-->
-                            <div class="d-flex flex-column text-gray-600">
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>بدون کنترل ادمین</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش مالی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>فعال گزارشات</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش پرداخت ها </div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش اختلاف نظرات</div>
-                                <div class='d-flex align-items-center py-2'>
-                                    <span class='bullet bg-primary me-3'></span>
-                                    <em>نمایش بیشتر..</em>
-                                </div>
-                            </div>
-                            <!--end::مجوزها-->
-                        </div>
-                        <!--end::کارت body-->
-                        <!--begin::کارت footer-->
-                        <div class="card-footer flex-wrap pt-0">
-                            <a href="apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>
-                        </div>
-                        <!--end::کارت footer-->
-                    </div>
-                    <!--end::کارت-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::کارت-->
-                    <div class="card card-flush h-md-100">
-                        <!--begin::کارت header-->
-                        <div class="card-header">
-                            <!--begin::کارت title-->
-                            <div class="card-title">
-                                <h2>پشتیبانی</h2>
-                            </div>
-                            <!--end::کارت title-->
-                        </div>
-                        <!--end::کارت header-->
-                        <!--begin::کارت body-->
-                        <div class="card-body pt-1">
-                            <!--begin::users-->
-                            <div class="fw-bold text-gray-600 mb-5">کل کاربران با این نقش: 23</div>
-                            <!--end::users-->
-                            <!--begin::مجوزها-->
-                            <div class="d-flex flex-column text-gray-600">
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>بدون کنترل ادمین</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش فقط خلاصه های مالی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش پرداخت ها </div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش اختلاف نظرات</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نظرات مشتریان</div>
-                            </div>
-                            <!--end::مجوزها-->
-                        </div>
-                        <!--end::کارت body-->
-                        <!--begin::کارت footer-->
-                        <div class="card-footer flex-wrap pt-0">
-                            <a href="apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>
-                        </div>
-                        <!--end::کارت footer-->
-                    </div>
-                    <!--end::کارت-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4">
-                    <!--begin::کارت-->
-                    <div class="card card-flush h-md-100">
-                        <!--begin::کارت header-->
-                        <div class="card-header">
-                            <!--begin::کارت title-->
-                            <div class="card-title">
-                                <h2>آزمایش</h2>
-                            </div>
-                            <!--end::کارت title-->
-                        </div>
-                        <!--end::کارت header-->
-                        <!--begin::کارت body-->
-                        <div class="card-body pt-1">
-                            <!--begin::users-->
-                            <div class="fw-bold text-gray-600 mb-5">کل کاربران با این نقش: 546</div>
-                            <!--end::users-->
-                            <!--begin::مجوزها-->
-                            <div class="d-flex flex-column text-gray-600">
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>بدون کنترل ادمین</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش فقط خلاصه های مالی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش گزارشات </div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش پرداخت ها </div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش اختلاف نظرات</div>
-                            </div>
-                            <!--end::مجوزها-->
-                        </div>
-                        <!--end::کارت body-->
-                        <!--begin::کارت footer-->
-                        <div class="card-footer flex-wrap pt-0">
-                            <a href="apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>
-                        </div>
-                        <!--end::کارت footer-->
-                    </div>
-                    <!--end::کارت-->
-                </div>
-                <!--end::Col-->
+                @endforeach
+
                 <!--begin::افزودن new card-->
                 <div class="ol-md-4">
                     <!--begin::کارت-->
@@ -1079,6 +898,6 @@
 @endsection
 
 @section('script')
-    <script src="{{asset('/js/custom/apps/user-management/roles/list/add.js')}}"></script>
-    <script src="{{asset('/js/custom/apps/user-management/roles/list/update-role.js')}}"></script>
+    {{--<script src="{{asset('/js/custom/apps/user-management/roles/list/add.js')}}"></script>
+    <script src="{{asset('/js/custom/apps/user-management/roles/list/update-role.js')}}"></script>--}}
 @endsection

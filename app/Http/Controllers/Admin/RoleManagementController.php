@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role;
 
 class RoleManagementController extends Controller
 {
@@ -12,7 +13,8 @@ class RoleManagementController extends Controller
      */
     public function index()
     {
-        return view('user-management.roles.list');
+        $roles = Role::latest()->paginate(20);
+        return view('user-management.roles.list', compact('roles'));
     }
 
     /**
@@ -28,7 +30,21 @@ class RoleManagementController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        $request->validate([
+            'role_name' => 'required',
+            'role_display_name' => 'required'
+        ]);
+
+        $role = Role::create([
+            'name' => $request->role_name,
+            'display_name' => $request->role_display_name,
+            'guard_name' => 'web'
+        ]);
+        //$permissions = $request->except('_token', 'display_name', 'name');
+        //$role->givePermissionTo($permissions);
+
+        alert()->success('نقش مورد نظر ایجاد شد', 'باتشکر');
+        return redirect()->route('user-management.roles.index');
     }
 
     /**
