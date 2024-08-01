@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
-Route::prefix('user-management')->name('user-management.')->group(function () {
+Route::prefix('user-management')->middleware('auth')->name('user-management.')->group(function () {
 
     Route::resource('/users', \App\Http\Controllers\Admin\UserManagementController::class);
 
@@ -11,7 +11,7 @@ Route::prefix('user-management')->name('user-management.')->group(function () {
 
     Route::resource('/permissions', \App\Http\Controllers\Admin\PermissionManagementController::class);
 
-})->middleware('auth');
+});
 
 Route::prefix('account')->name('account.')->group(function () {
 

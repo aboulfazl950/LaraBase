@@ -70,7 +70,7 @@ var KTSigninGeneral = function () {
                         submitButton.disabled = false;
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        Swal.fire({
+                        /*Swal.fire({
                             text: "You have successfully logged in!",
                             icon: "success",
                             buttonsStyling: false,
@@ -89,7 +89,7 @@ var KTSigninGeneral = function () {
                                     location.href = redirectUrl;
                                 }
                             }
-                        });
+                        });*/
                     }, 2000);
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
@@ -128,7 +128,7 @@ var KTSigninGeneral = function () {
                             form.reset();
 
                             // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                            Swal.fire({
+                            /*Swal.fire({
                                 text: "You have successfully logged in!",
                                 icon: "success",
                                 buttonsStyling: false,
@@ -136,7 +136,7 @@ var KTSigninGeneral = function () {
                                 customClass: {
                                     confirmButton: "btn btn-primary"
                                 }
-                            });
+                            });*/
 
                             const redirectUrl = form.getAttribute('data-kt-redirect-url');
 
