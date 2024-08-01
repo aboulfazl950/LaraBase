@@ -287,7 +287,8 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-lg-5 my-7">
                             <!--begin::form-->
-                            <form id="kt_modal_add_role_form" class="form" action="#">
+                            <form id="kt_modal_add_role_form" class="form" action="{{ route('user-management.roles.store') }}" method="POST">
+                                @csrf
                                 <!--begin::Scroll-->
                                 <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_add_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_role_header" data-kt-scroll-wrappers="#kt_modal_add_role_scroll" data-kt-scroll-offset="300px">
                                     <!--begin::Input group-->
@@ -299,6 +300,16 @@
                                         <!--end::Tags-->
                                         <!--begin::Input-->
                                         <input class="form-control form-control-solid" placeholder="سطح دسترسی خود را وارد نمایید" name="role_name" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <div class="fv-row mb-10">
+                                        <!--begin::Tags-->
+                                        <label class="fs-5 fw-bold form-label mb-2">
+                                            <span class="required">نام نمایشی سطح دسترسی</span>
+                                        </label>
+                                        <!--end::Tags-->
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control-solid" placeholder="سطح دسترسی خود را وارد نمایید" name="role_display_name" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Input group-->
@@ -443,19 +454,19 @@
                                                         <div class="d-flex">
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_read" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_read" />
                                                                 <span class="form-check-label">خواندن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_write" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_write" />
                                                                 <span class="form-check-label">نوشتن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_create" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_create" />
                                                                 <span class="form-check-label">ساختن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
@@ -600,7 +611,7 @@
                                                 <!--begin::Table row-->
                                                 <tr>
                                                     <!--begin::Tags-->
-                                                    <td class="text-gray-800">Repositیاy مدیریت</td>
+                                                    <td class="text-gray-800">Repository مدیریت</td>
                                                     <!--end::Tags-->
                                                     <!--begin::تنظیمات-->
                                                     <td>
@@ -608,19 +619,19 @@
                                                         <div class="d-flex">
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_read" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_read" />
                                                                 <span class="form-check-label">خواندن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_write" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_write" />
                                                                 <span class="form-check-label">نوشتن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_create" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_create" />
                                                                 <span class="form-check-label">ساختن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
@@ -840,19 +851,19 @@
                                                         <div class="d-flex">
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_read" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_read" />
                                                                 <span class="form-check-label">خواندن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_write" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_write" />
                                                                 <span class="form-check-label">نوشتن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repیاting_create" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_create" />
                                                                 <span class="form-check-label">ساختن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
@@ -997,7 +1008,7 @@
                                                 <!--begin::Table row-->
                                                 <tr>
                                                     <!--begin::Tags-->
-                                                    <td class="text-gray-800">Repositیاy مدیریت</td>
+                                                    <td class="text-gray-800">Repository مدیریت</td>
                                                     <!--end::Tags-->
                                                     <!--begin::Input group-->
                                                     <td>
@@ -1005,19 +1016,19 @@
                                                         <div class="d-flex">
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_read" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_read" />
                                                                 <span class="form-check-label">خواندن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_write" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_write" />
                                                                 <span class="form-check-label">نوشتن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repositیاy_management_create" />
+                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_create" />
                                                                 <span class="form-check-label">ساختن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
@@ -1065,4 +1076,9 @@
 
 @section('title')
     لیست نقش ها
+@endsection
+
+@section('script')
+    <script src="{{asset('/js/custom/apps/user-management/roles/list/add.js')}}"></script>
+    <script src="{{asset('/js/custom/apps/user-management/roles/list/update-role.js')}}"></script>
 @endsection

@@ -13,13 +13,11 @@ Route::prefix('user-management')->name('user-management.')->group(function () {
         return view('user-management.users.view');
     })->name('user-view');
 
-    Route::get('/roles/list', function () {
-        return view('user-management.roles.list');
-    })->name('role-list');
-
-    Route::get('/roles/view', function () {
+    /*Route::get('/roles/view', function () {
         return view('user-management.roles.view');
-    })->name('role-view');
+    })->name('role-view');*/
+
+    Route::resource('/roles', \App\Http\Controllers\Admin\RoleManagementController::class);
 
     Route::resource('/permissions', \App\Http\Controllers\Admin\PermissionManagementController::class);
 

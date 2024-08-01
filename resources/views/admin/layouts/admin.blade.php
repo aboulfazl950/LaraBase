@@ -4660,6 +4660,7 @@
 <script src="{{asset('/js/custom/utilities/modals/users-search.js')}}"></script>
 <!--end::سفارشی Javascript-->
 <!--end::Javascript-->
+@yield('script')
 </body>
 <!--end::Body-->
 </html>
