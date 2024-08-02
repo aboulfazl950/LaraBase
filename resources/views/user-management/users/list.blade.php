@@ -438,14 +438,14 @@
                                 <!--end::Avatar-->
                                 <!--begin::کاربر details-->
                                 <div class="d-flex flex-column">
-                                    <a href="apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">{{ $user->name }}</a>
+                                    <a href="apps/user-management/users/view.html" class="text-gray-800 text-hover-primary mb-1">{{ Profile($user->profileFields)->first_name . " " .Profile($user->profileFields)->last_name }}</a>
                                     <span>{{ $user->email }}</span>
                                 </div>
                                 <!--begin::کاربر details-->
                             </td>
                             <td>مدیریت</td>
                             <td>
-                                <div class="badge badge-light fw-bold">{{$user->last_login_at?friendlyTime($user->last_login_at->timestamp):'22'}}</div>
+                                <div class="badge badge-light fw-bold">{{$user->last_login_at?friendlyTime($user->last_login_at->timestamp):''}}</div>
                             </td>
                             <td></td>
                             <td>{{ verta($user->created_at) }}</td>

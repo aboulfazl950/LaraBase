@@ -61,6 +61,14 @@ class User extends Authenticatable
 
     public function getLastLoginAtAttribute($date)
     {
-        return Carbon::parse($date);
+        if($date) {
+            return Carbon::parse($date);
+        }
+    }
+
+    public function profileFields(){
+
+        return $this->hasMany(UserProfile::class);
+
     }
 }

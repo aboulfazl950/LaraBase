@@ -54,3 +54,15 @@ if (!function_exists('friendlyTime')) {
         return __("time.friendlytime{$future}{$granularity}{$singular}",['diff' => $diff]);
     }
 }
+
+if (!function_exists('Profile')) {
+    function Profile($profile_fields)
+    {
+        $profile = new stdClass();
+        foreach ($profile_fields as $profile_field) {
+            $profile->{$profile_field->key} = $profile_field->value;
+        }
+
+        return $profile;
+    }
+}
