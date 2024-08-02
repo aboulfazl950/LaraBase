@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserManagementController extends Controller
@@ -12,7 +13,8 @@ class UserManagementController extends Controller
      */
     public function index()
     {
-        return view('user-management.users.list');
+        $users = User::latest()->paginate(20);
+        return view('user-management.users.list', compact('users'));
     }
 
     /**
