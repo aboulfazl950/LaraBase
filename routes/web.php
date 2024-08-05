@@ -11,6 +11,7 @@ Route::prefix('user-management')->middleware('auth')->name('user-management.')->
 
     Route::resource('/permissions', \App\Http\Controllers\Admin\PermissionManagementController::class);
 
+    Route::get('/roles/{role}/show-modal', [\App\Http\Controllers\Admin\RoleManagementController::class, 'showModal'])->name('roles.show-modal');
 });
 
 Route::prefix('account')->name('account.')->group(function () {

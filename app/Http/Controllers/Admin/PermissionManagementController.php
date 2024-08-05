@@ -40,7 +40,22 @@ class PermissionManagementController extends Controller
             'display_name' => $request->permission_display_name,
             'guard_name' => 'web',
             'core' => false,
+            'is_crud' => false,
         ]);
+
+        if($request->permissions_crud) {
+            $tr = ["c"=>"(ایجاد)","u"=>"(ویرایش)","d"=>"(حذف)"];
+            foreach (str_split($request->permissions_crud) as $char) {
+
+                Permission::create([
+                    'name' => $request->permission_name."_".$char,
+                    'display_name' => $request->permission_display_name." ".$tr[$char],
+                    'guard_name' => 'web',
+                    'core' => false,
+                    'is_crud' => true,
+                ]);
+            }
+        }
 
         alert()->success('پرمیژن مورد نظر ایجاد شد', 'باتشکر');
         return redirect()->route('user-management.permissions.index');

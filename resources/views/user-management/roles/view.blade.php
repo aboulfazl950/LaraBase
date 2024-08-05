@@ -14,7 +14,7 @@
                         <div class="card-header">
                             <!--begin::کارت title-->
                             <div class="card-title">
-                                <h2 class="mb-0">توسعه دهنده</h2>
+                                <h2 class="mb-0">{{$role->display_name}}</h2>
                             </div>
                             <!--end::کارت title-->
                         </div>

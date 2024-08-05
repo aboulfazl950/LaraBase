@@ -27,16 +27,10 @@
                             <!--end::users-->
                             <!--begin::مجوزها-->
                             <div class="d-flex flex-column text-gray-600">
+                                @foreach ($role->permissions as $permission)
                                 <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>همه کنترل های ادمین</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش مالی</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>فعال گزارشات</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش پرداخت ها</div>
-                                <div class="d-flex align-items-center py-2">
-                                    <span class="bullet bg-primary me-3"></span>نمایش اختلاف نظرات</div>
+                                    <span class="bullet bg-primary me-3"></span>{{ $permission->display_name }}</div>
+                                @endforeach
                                 <div class='d-flex align-items-center py-2'>
                                     <span class='bullet bg-primary me-3'></span>
                                     <em>بیشتر</em>
@@ -47,8 +41,9 @@
                         <!--end::کارت body-->
                         <!--begin::کارت footer-->
                         <div class="card-footer flex-wrap pt-0">
-                            <a href="apps/user-management/roles/view.html" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
-                            <button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>
+                            <a href="{{ route('user-management.roles.show', ['role' => $role->id]) }}" class="btn btn-light btn-active-primary my-1 me-2">نمایش سطح دسترسی</a>
+                            <a data-bs-toggle="modal" data-bs-target="#kt_modal_update_role" data-load-url="{{ route('user-management.roles.show-modal', ['role' => $role->id]) }}" class="btn btn-light btn-active-light-primary my-1 ">سطح دسترسی</a>
+                            {{--<button type="button" class="btn btn-light btn-active-light-primary my-1" data-bs-toggle="modal" data-target-id="{{ $role->id }}" data-bs-target="#kt_modal_update_role">سطح دسترسی</button>--}}
                         </div>
                         <!--end::کارت footer-->
                     </div>
@@ -163,10 +158,11 @@
                                                     </td>
                                                 </tr>
                                                 <!--end::Table row-->
+                                                @foreach ($permissions as $permission)
                                                 <!--begin::Table row-->
                                                 <tr>
                                                     <!--begin::Tags-->
-                                                    <td class="text-gray-800">کاربر مدیریت</td>
+                                                    <td class="text-gray-800">{{$permission->display_name}}</td>
                                                     <!--end::Tags-->
                                                     <!--begin::تنظیمات-->
                                                     <td>
@@ -174,292 +170,41 @@
                                                         <div class="d-flex">
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
+                                                                <input class="form-check-input" type="checkbox" value="{{$permission->name}}" name="{{$permission->name}}" />
+                                                                <span class="form-check-label">مشاهده</span>
                                                             </label>
                                                             <!--end::Checkbox-->
+                                                            @if(in_array($permission->name."_c",$crud_permissions->pluck('name')->toArray()))
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
+                                                                <input class="form-check-input" type="checkbox" value="{{$permission->name}}_c" name="{{$permission->name}}_c" />
+                                                                <span class="form-check-label">افزودن</span>
                                                             </label>
                                                             <!--end::Checkbox-->
+                                                            @endif
+                                                            @if(in_array($permission->name."_u",$crud_permissions->pluck('name')->toArray()))
+                                                            <!--begin::Checkbox-->
+                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
+                                                                <input class="form-check-input" type="checkbox" value="{{$permission->name}}_u" name="{{$permission->name}}_u" />
+                                                                <span class="form-check-label">ویرایش</span>
+                                                            </label>
+                                                            <!--end::Checkbox-->
+                                                            @endif
+                                                            @if(in_array($permission->name."_d",$crud_permissions->pluck('name')->toArray()))
                                                             <!--begin::Checkbox-->
                                                             <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
+                                                                <input class="form-check-input" type="checkbox" value="{{$permission->name}}_d" name="{{$permission->name}}_d" />
+                                                                <span class="form-check-label">حذف</span>
                                                             </label>
                                                             <!--end::Checkbox-->
+                                                            @endif
                                                         </div>
                                                         <!--end::Wrapper-->
                                                     </td>
                                                     <!--end::تنظیمات-->
                                                 </tr>
                                                 <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">مدیریت محتوا</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">مدیریت مالی</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">گزارش</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">حقوق و دستمزد</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">اختلاف نظرات مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">کنترل های کلید دسترسی</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">دیتابیس مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">Repository مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::تنظیمات-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::تنظیمات-->
-                                                </tr>
-                                                <!--end::Table row-->
+                                                @endforeach
                                                 </tbody>
                                                 <!--end::Table body-->
                                             </table>
@@ -514,370 +259,7 @@
                         <!--begin::Modal body-->
                         <div class="modal-body scroll-y mx-5 my-7">
                             <!--begin::form-->
-                            <form id="kt_modal_update_role_form" class="form" action="#">
-                                <!--begin::Scroll-->
-                                <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_role_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_update_role_header" data-kt-scroll-wrappers="#kt_modal_update_role_scroll" data-kt-scroll-offset="300px">
-                                    <!--begin::Input group-->
-                                    <div class="fv-row mb-10">
-                                        <!--begin::Tags-->
-                                        <label class="fs-5 fw-bold form-label mb-2">
-                                            <span class="required">نام سطح دسترسی</span>
-                                        </label>
-                                        <!--end::Tags-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="سطح دسترسی خود را وارد نمایید" name="role_name" value="توسعه دهنده" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::مجوزها-->
-                                    <div class="fv-row">
-                                        <!--begin::Tags-->
-                                        <label class="fs-5 fw-bold form-label mb-2">سطح دسترسی مجوزها</label>
-                                        <!--end::Tags-->
-                                        <!--begin::Table wrapper-->
-                                        <div class="table-responsive">
-                                            <!--begin::Table-->
-                                            <table class="table align-middle table-row-dashed fs-6 gy-5">
-                                                <!--begin::Table body-->
-                                                <tbody class="text-gray-600 fw-semibold">
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <td class="text-gray-800">مدیریت Access
-                                                        <span class="ms-1" data-bs-toggle="tooltip" title="همهows a full access to the system">
-																					<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
-																						<span class="path1"></span>
-																						<span class="path2"></span>
-																						<span class="path3"></span>
-																					</i>
-																				</span></td>
-                                                    <td>
-                                                        <!--begin::Checkbox-->
-                                                        <label class="form-check form-check-sm form-check-custom form-check-solid me-9">
-                                                            <input class="form-check-input" type="checkbox" value="" id="kt_roles_select_all" />
-                                                            <span class="form-check-label" for="kt_roles_select_all">انتخاب همه</span>
-                                                        </label>
-                                                        <!--end::Checkbox-->
-                                                    </td>
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">کاربر مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="user_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">مدیریت محتوا</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="content_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">مدیریت مالی</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="financial_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">گزارش</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="reporting_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">حقوق و دستمزد</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="payroll_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">اختلاف نظرات مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="disputes_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">کنترل های کلید دسترسی</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="api_controls_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">دیتابیس مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="database_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                <!--begin::Table row-->
-                                                <tr>
-                                                    <!--begin::Tags-->
-                                                    <td class="text-gray-800">Repository مدیریت</td>
-                                                    <!--end::Tags-->
-                                                    <!--begin::Input group-->
-                                                    <td>
-                                                        <!--begin::Wrapper-->
-                                                        <div class="d-flex">
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-sm form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_read" />
-                                                                <span class="form-check-label">خواندن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid me-5 me-lg-20">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_write" />
-                                                                <span class="form-check-label">نوشتن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                            <!--begin::Checkbox-->
-                                                            <label class="form-check form-check-custom form-check-solid">
-                                                                <input class="form-check-input" type="checkbox" value="" name="repository_management_create" />
-                                                                <span class="form-check-label">ساختن</span>
-                                                            </label>
-                                                            <!--end::Checkbox-->
-                                                        </div>
-                                                        <!--end::Wrapper-->
-                                                    </td>
-                                                    <!--end::Input group-->
-                                                </tr>
-                                                <!--end::Table row-->
-                                                </tbody>
-                                                <!--end::Table body-->
-                                            </table>
-                                            <!--end::Table-->
-                                        </div>
-                                        <!--end::Table wrapper-->
-                                    </div>
-                                    <!--end::مجوزها-->
-                                </div>
-                                <!--end::Scroll-->
-                                <!--begin::Actions-->
-                                <div class="text-center pt-15">
-                                    <button type="reset" class="btn btn-light me-3" data-kt-roles-modal-action="cancel">لغو</button>
-                                    <button type="submit" class="btn btn-primary" data-kt-roles-modal-action="submit">
-                                        <span class="indicator-label">ثبت</span>
-                                        <span class="indicator-progress">لطفا صبر کنید...
-																<span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                    </button>
-                                </div>
-                                <!--end::Actions-->
-                            </form>
+
                             <!--end::form-->
                         </div>
                         <!--end::Modal body-->
@@ -900,4 +282,12 @@
 @section('script')
     {{--<script src="{{asset('/js/custom/apps/user-management/roles/list/add.js')}}"></script>
     <script src="{{asset('/js/custom/apps/user-management/roles/list/update-role.js')}}"></script>--}}
+    <script>
+        $("#kt_modal_update_role").on("show.bs.modal", function (e) {
+            var loadurl = $(e.relatedTarget).data("load-url");
+            //var title = $(e.relatedTarget).data("title");
+            $(this).find(".modal-body").load(loadurl);
+            //$(this).find(".modal-title").html(title);
+        });
+    </script>
 @endsection

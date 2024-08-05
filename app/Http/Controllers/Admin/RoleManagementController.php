@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class RoleManagementController extends Controller
 {
@@ -14,7 +15,10 @@ class RoleManagementController extends Controller
     public function index()
     {
         $roles = Role::latest()->paginate(20);
-        return view('user-management.roles.list', compact('roles'));
+        $permissions = Permission::where('is_crud',false)->get();
+        $crud_permissions = Permission::where('is_crud',true)->get();
+
+        return view('user-management.roles.list', compact('roles','permissions','crud_permissions'));
     }
 
     /**
@@ -40,8 +44,8 @@ class RoleManagementController extends Controller
             'display_name' => $request->role_display_name,
             'guard_name' => 'web'
         ]);
-        //$permissions = $request->except('_token', 'display_name', 'name');
-        //$role->givePermissionTo($permissions);
+        $permissions = $request->except('_token', 'role_display_name', 'role_name');
+        $role->givePermissionTo($permissions);
 
         alert()->success('نقش مورد نظر ایجاد شد', 'باتشکر');
         return redirect()->route('user-management.roles.index');
@@ -50,9 +54,9 @@ class RoleManagementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Role $role)
     {
-        return view('user-management.roles.view');
+        return view('user-management.roles.view', compact('role'));
     }
 
     /**
@@ -66,9 +70,22 @@ class RoleManagementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Role $role)
     {
-        //
+        $request->validate([
+            'role_name' => 'required',
+            'role_display_name' => 'required'
+        ]);
+
+        $role->update([
+            'name' => $request->role_name,
+            'display_name' => $request->role_display_name
+        ]);
+        $permissions = $request->except('_token', 'role_display_name', 'role_name','_method');
+        $role->syncPermissions($permissions);
+
+        alert()->success('نقش مورد نظر ویرایش شد', 'باتشکر');
+        return redirect()->route('user-management.roles.index');
     }
 
     /**
@@ -77,5 +94,12 @@ class RoleManagementController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function showModal(Role $role)
+    {
+        $permissions = Permission::where('is_crud',false)->get();
+        $crud_permissions = Permission::where('is_crud',true)->get();
+        return view('user-management.roles.edit-role-modal', compact('role','permissions','crud_permissions'));
     }
 }

@@ -154,6 +154,19 @@
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
+
+
+                                <!--begin::Input group-->
+                                <div class="fv-row mb-7">
+                                    <!--begin::Checkbox-->
+                                    <label class="form-check form-check-custom form-check-solid me-9">
+                                        <input class="form-check-input" type="checkbox" value="cud" name="permissions_crud" id="kt_permissions_crud" />
+                                        <span class="form-check-label" for="kt_permissions_crud">Set as crud permission</span>
+                                    </label>
+                                    <!--end::Checkbox-->
+                                </div>
+                                <!--end::Input group-->
+
                                 <!--begin::Input group-->
                                 <div class="fv-row mb-7">
                                     <!--begin::Checkbox-->
